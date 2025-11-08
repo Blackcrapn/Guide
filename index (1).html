@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гайд по выживанию в лесу</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1a2f1a;
+            color: #e8f5e8;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23255c25"/><path d="M20,80 L30,50 L40,70 L50,40 L60,60 L70,30 L80,50" stroke="%23358f35" stroke-width="5" fill="none"/></svg>');
+            border-bottom: 3px solid #3a7a3a;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #8bc34a;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #c8e6c9;
+            margin-bottom: 30px;
+        }
+        
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content {
+            background-color: #2d4a2d;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: #8bc34a;
+            margin: 25px 0 15px;
+            border-bottom: 2px solid #4caf50;
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            color: #a5d6a7;
+            margin: 20px 0 10px;
+        }
+        
+        p, li {
+            margin-bottom: 12px;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #4caf50, transparent);
+            margin: 30px 0;
+        }
+        
+        .quick-summary {
+            background-color: #3a5c3a;
+            border-left: 5px solid #8bc34a;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 25px 0;
+        }
+        
+        .quick-summary h3 {
+            margin-top: 0;
+        }
+        
+        .back-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .back-btn:hover {
+            background-color: #f57c00;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #a5d6a7;
+            border-top: 1px solid #3a5c3a;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Гайд по выживанию в лесу</h1>
+            <p class="subtitle">Самый полный гайд для выживания на 99 ночей</p>
+        </header>
+        
+        <div class="menu">
+            <button class="btn" id="russianBtn">Максимальный гайд на 99 ночей в лесу</button>
+            <button class="btn" id="englishBtn">The maximum guide for 99 nights in the forest</button>
+        </div>
+        
+        <div class="content" id="russianContent">
+            <h2>Максимальный гайд на 99 ночей в лесу</h2>
+            
+            <h3>1) Что нужно знать про Оленя (ключевые механики)</h3>
+            <p>У Оленя плохая навигация / pathfinding — он плохо обходит крупные объекты и может застревать за деревьями или постройками. Это даёт возможность загонять/отвлекать его с помощью препятствий.</p>
+            <p>Огонь (кампфайр) отпугивает Оленя — поддерживайте костёр во время ночи.</p>
+            <p>Оленя можно заманить в ловушку, если заранее подготовить «коридор» и не дать ему широкого обхода. (Видео-методы/гайды подробно показывают приёмы с лог-стенами и ловушками).</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>2) Материалы и инструменты (минимум для безопасной «деревянной» базы)</h3>
+            <p>(количества ориентировочные — подстраивай под свой стиль и число игроков)</p>
+            
+            <h3>Обязательное:</h3>
+            <ul>
+                <li>Топоры — 1–2 (или Good Axe при наличии).</li>
+                <li>Саплинг/посадочные кружки (собирать и сохранять много саженцев).</li>
+                <li>Дрова, ветки — для костра и стен.</li>
+                <li>Лог-стены / деревянные стены (если строишь вручную).</li>
+                <li>Костёр (campfire) — минимум 1 большой, лучше 2.</li>
+                <li>Ловушки (bear traps) — 3–6 штук для ворот или коридора.</li>
+                <li>Запас еды (стевы/консервы), бинты/пластыри.</li>
+            </ul>
+            
+            <h3>Желательное:</h3>
+            <ul>
+                <li>Фонари/фонарики (если механика отпугивания светом актуальна в твоей версии).</li>
+                <li>Доп. укрепления: заборы, каменные блоки, дополнительные костры.</li>
+            </ul>
+            
+            <div class="section-divider"></div>
+            
+            <h3>3) Как строить «деревянную» базу — пошагово (схема и логика)</h3>
+            <p>Цель — создать плотную «стену» из деревьев/логов, в которой нет дыр, и коридор-ловушку для Оленя.</p>
+            
+            <h3>A. Выбор точки:</h3>
+            <p>Берём место рядом с ресурсами (деревья, вода, точки лута), но не в низине. Идеально — участок с несколькими большими деревьями.</p>
+            
+            <h3>B. Сбор саженцев:</h3>
+            <p>Срубай большие деревья только после того как собрал много саженцев. Пилите так, чтобы собрать 20–50 саплингов — потребуется много для плотной посадки. Совет: храните саженцы в одном месте.</p>
+            
+            <h3>C. План «посадки в кольцах» (основная хитрость):</h3>
+            <p>Схема: делаем 2–3 концентрических кольца посадочных кружков (overlapping planting circles), чтобы минимизировать щели. Ряд — посадка, подождать — деревья вырастают в плотный «живой забор». Reddit-игроки рекомендуют именно перекрывание кругов для минимальных пробелов.</p>
+            
+            <h3>D. Постройка кордона (логические шаги):</h3>
+            <ol>
+                <li>Размечаем круг диаметром ~10–15 блоков (зависит от карты и команды).</li>
+                <li>Вокруг периметра ставим посадочные кружки через ≈1—1.5 метра (или по доступной сетке). Посади саженцы в 2 слоя (внутренний + внешний) с перекрытием.</li>
+                <li>Пока саженцы растут — сделай временные лог-стены/барьеры (чтобы не было дыр). Можно ставить 3 стенки в форме куба-ловушки на входе (см. ловушку ниже).</li>
+            </ol>
+            
+            <h3>E. Вход/коридор-ловушка:</h3>
+            <p>Оставь один контролируемый вход — узкий коридор 1–2 блока шириной. В коридоре поставь 3-4 ловушки (bear traps) и по обеим сторонам лог-барьеры. Когда Оленя заманят в коридор, он не сможет развернуться и сядет на ловушки. Видео-гайды показывают эффективные кубические лог-ловушки.</p>
+            
+            <h3>F. Время на рост деревьев:</h3>
+            <p>Дай деревьям вырасти — в это время держи костёр и временные барьеры. Если нельзя ждать — используй деревянные стены/лог-постройки вместо живой изгороди.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>4) Размещение костров и их роль</h3>
+            <p>Ставь основной кампфайр в центре базы — он даёт безопасную зону и отпугивает Оленя. На подходах поставь дополнительные малые костры у ворот. Всегда держи запас топлива.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>5) Ловушки и тактика заманивания</h3>
+            <p>Тактика «заведи и прикрой»: одним игроком заманиваешь Оленя к входу, оставляешь путь к коридору открытым — другой игрок закрывает обходные пути (срубает временные помехи) и включает ловушки. Помни: Оленю выгодно бежать напрямую — узкие коридоры и лог-стены работают против него.</p>
+            <p>Bear traps ставь не прямо у входа, а в середине коридора — шанс срабатывания больше и он будет «сажать» Оленя. Не забывай — игроки тоже могут активировать их (в редких случаях) — осторожно.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>6) Защита от других угроз (Филин, Культисты, Рэм)</h3>
+            <p>Костёр + свет — полезны против большинства мобов, но культисты атакуют иначе — держи внешние ловушки и назначь «наблюдателя». Для культистов и рэмов потребуются боевые игроки с улучшенным оружием.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>7) Ночная рутина — чеклист (при наступлении ночи)</h3>
+            <ol>
+                <li>Подстёжи основной костёр, пополни запасы топлива.</li>
+                <li>Активируй ловушки в коридорах (если есть режим «вкл/выкл»).</li>
+                <li>Убедись, что еда и бинты доступны у входа.</li>
+                <li>Назначь роли: 1 защитник возле входа, 1 запасной — у костра, 1 собирает ресурсы/патрулирует дальние точки.</li>
+                <li>Держись близко к безопасной зоне — при критической атаке лучше спастись, чем гоняться за мобом и потерять ресурсы.</li>
+            </ol>
+            
+            <div class="section-divider"></div>
+            
+            <h3>8) Как масштабировать базу для долгой игры (дни → тысячи)</h3>
+            <p>Перемещай «ядро» базы ближе к источникам ресурсов (или строй форпосты).</p>
+            <p>Создавай «селекционную» зону саженцев: постоянный склад саженцев и система перекладок для вовремя заполняемых пробелов.</p>
+            <p>Увеличивай количество костров и запасов еды. Храни материалы в нескольких сундуках/шкафах для восстановления после рейда.</p>
+            <p>Улучшай инструменты (Good Axe / Strong Axe) — они экономят время на рубке и ускоряют укрепления.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>9) Советы для соло-игры vs команда</h3>
+            <p>Соло: делай компактную базу (2–3 слоя посадки), держи запас бинтов и лёгких ловушек; изучай повадки Оленя (он реже приходит ночью 1–2).</p>
+            <p>Команда: распределение ролей критично — строители, охотники, запасной (ремонт/подмога). Командная игра даёт преимущество в ночных отбиваниях и ловле мобов.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>10) Частые ошибки и как их избежать</h3>
+            <p>Пропуски между деревьями — посадка без перекрытия даёт щели, через которые Оленя «пробьёт» путь. Решение: overlapping planting circles.</p>
+            <p>Недостаточно ловушек в коридоре — нужен 3–4 для надёжности.</p>
+            <p>Нет запасов топлива — костёр гаснет и база теряет защиту. Решение: минимум 2 склада с дровами рядом.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>11) Примеры готовых планов (шаблоны)</h3>
+            <h3>A. Малый соло-лагерь (до 3 игроков)</h3>
+            <p>Кольца с шагом 1.2 м, внутренний диаметр ≈ 6 м. 1 центральный кампфайр, 3 ловушки в узком коридоре, 2 сундука с едой.</p>
+            
+            <h3>B. Командный форпост (4+ игроков)</h3>
+            <p>2–3 концентрических кольца, 2 входа (один запасной), внешняя полоса из лог-стен, внутренняя — посадка. 6+ ловушек в ключевых точках. Дублированные костры.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>12) Продвинутые приёмы (профессионалы используют)</h3>
+            <p>Заманивание Оленя через препятственные маршруты: выстраиваешь серию временных стен/дорожек, чтобы он шел куда нужно, затем закрываешь обходы. (Требует координации).</p>
+            <p>Использование высот и зданий: Оленю сложнее залезть в здания — используйте здания как дополнительные барьеры.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>13) Ресурсы для дальнейшего изучения (полезные ссылки и видео)</h3>
+            <p>PC Gamer — общие тактики и роль костра.</p>
+            <p>Fandom / Wiki — механики мобов (The Deer) и советы.</p>
+            <p>Видео-гайды по ловушкам и базам (YouTube Shorts / полные ролики).</p>
+            <p>Reddit — конкретные «игрок-решения» и community-тесты (перекрытие посадок и т.д.).</p>
+            
+            <div class="section-divider"></div>
+            
+            <div class="quick-summary">
+                <h3>Короткая чек-версия (для карточки/быстрых заметок)</h3>
+                <ol>
+                    <li>Собрать много саженцев.</li>
+                    <li>Посадить 2–3 перекрывающихся кольца.</li>
+                    <li>Сделать один контролируемый вход — узкий коридор.</li>
+                    <li>Поставить 3–4 ловушки в коридоре и дублировать костры.</li>
+                    <li>Поддерживать запасы топлива и бинтов.</li>
+                    <li>Держать роли распределёнными ночью.</li>
+                </ol>
+            </div>
+            
+            <button class="back-btn" onclick="hideContent('russianContent')">Назад к меню</button>
+        </div>
+        
+        <div class="content" id="englishContent">
+            <h2>🏕️ Ultimate Survival Guide — 99 Nights in the Forest</h2>
+            
+            <p>Goal: Build a base that keeps you alive for all 99 nights — safe, resource-rich, and unbreakable against The Deer.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🦌 1) Understanding The Deer (Main Enemy)</h3>
+            <p>The Deer has poor pathfinding — it gets stuck behind large trees and structures. Use this to your advantage.</p>
+            <p>Fire repels The Deer — always keep your campfire burning at night.</p>
+            <p>You can trap The Deer using narrow corridors and barriers — it struggles to turn around in tight spaces.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🌲 2) Materials You'll Need</h3>
+            
+            <h3>Essential:</h3>
+            <ul>
+                <li>Axe (or Good Axe if available)</li>
+                <li>Lots of Saplings — you'll need 20–50 to build tree walls</li>
+                <li>Logs, sticks, and wood for fire and walls</li>
+                <li>Campfire (1 main + 1 backup)</li>
+                <li>3–6 Bear Traps for your entrance</li>
+                <li>Food supplies and healing items</li>
+            </ul>
+            
+            <h3>Optional:</h3>
+            <ul>
+                <li>Lanterns (for light & intimidation)</li>
+                <li>Extra walls, fences, or stone blocks</li>
+            </ul>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🛠️ 3) Building the Tree Base — Step by Step</h3>
+            
+            <h3>A. Pick the Right Location</h3>
+            <p>Choose a flat area surrounded by trees, not too low or swampy. Stay close to resources like wood and water.</p>
+            
+            <h3>B. Gather Saplings</h3>
+            <p>Cut trees carefully — collect at least 20–50 saplings before starting construction. You'll need a lot for tight coverage.</p>
+            
+            <h3>C. "Tree-Ring" Design (The Secret Trick)</h3>
+            <p>Plant trees in 2–3 overlapping circular rings. Each circle should overlap slightly with the previous one — this removes gaps so The Deer can't pass through.</p>
+            
+            <h3>D. Construction Steps</h3>
+            <ol>
+                <li>Mark a circle about 10–15 meters in diameter.</li>
+                <li>Around the edge, place planting spots every ~1 meter.</li>
+                <li>Fill both the inner and outer layers with saplings.</li>
+                <li>While trees grow, place temporary log walls to stay safe.</li>
+            </ol>
+            
+            <h3>E. The Entrance / Trap Corridor</h3>
+            <p>Leave one narrow entrance (1–2 blocks wide). Inside it, place 3–4 Bear Traps. Add side log-walls so The Deer has no escape route. If it enters, it'll get trapped and can't turn around.</p>
+            
+            <h3>F. Let Trees Grow</h3>
+            <p>Wait until the trees fully grow — that becomes your natural wall. If you can't wait, reinforce the area with log walls until they mature.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🔥 4) Campfire Strategy</h3>
+            <p>Keep one main campfire in the center of the base. Place two small fires near the entrance for extra safety. Always keep spare wood ready — never let the fire go out at night.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🪤 5) Using Traps & Bait Tactics</h3>
+            <p>Use bait and retreat: let The Deer see you and chase you into the corridor. Once it enters, it'll hit the traps and die quickly. Don't stand too close — traps can sometimes hurt players too.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>⚔️ 6) Other Threats (Owls, Cultists, Rams)</h3>
+            <p>Most enemies avoid fire and light, but cultists attack directly — use more traps. Rams are fast — use tighter walls and multiple layers. Always keep one player on watch during the night.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🌙 7) Night Routine Checklist</h3>
+            <ol>
+                <li>Refill and light your main campfire.</li>
+                <li>Check traps — make sure all are active.</li>
+                <li>Store food and bandages near the entrance.</li>
+                <li>Assign roles: 1 defender, 1 builder, 1 gatherer.</li>
+                <li>Stay inside the safe zone when the night starts.</li>
+            </ol>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🧱 8) Expanding for Long-Term Survival</h3>
+            <p>Build outposts closer to resource zones. Keep a sapling storage area for future repairs. Add more campfires and food storage. Upgrade tools (use Good Axe or Strong Axe for faster building).</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🧍 9) Solo vs. Team Tips</h3>
+            
+            <h3>Solo Play:</h3>
+            <p>Build small, compact bases (2 tree rings). Always keep bandages ready. Study enemy timing — The Deer appears less on early nights.</p>
+            
+            <h3>Team Play:</h3>
+            <p>Assign roles: Builder / Hunter / Scout / Defender. Team coordination is key during heavy attacks.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>⚠️ 10) Common Mistakes to Avoid</h3>
+            <p>🚫 Gaps between trees — The Deer will slip through! Always overlap circles.</p>
+            <p>🚫 Only one trap — place at least 3–4 for reliability.</p>
+            <p>🚫 Letting the fire go out — you'll lose your main defense.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🧩 11) Example Base Layouts</h3>
+            
+            <h3>Small Solo Base:</h3>
+            <p>2–3 tree rings, 1 campfire in the center, 3 traps, 1 entrance, 2 storage boxes.</p>
+            
+            <h3>Large Team Outpost:</h3>
+            <p>3 rings, 2 entrances (1 backup), 2 campfires, 6+ traps, log walls outside, trees inside.</p>
+            
+            <div class="section-divider"></div>
+            
+            <h3>🪓 12) Advanced Pro Techniques</h3>
+            <p>Path-blocking lure: Build wooden walls to guide The Deer exactly into your trap corridor.</p>
+            <p>Height Advantage: Build on elevated ground — The Deer can't climb high.</p>
+            <p>Multi-fire defense: Two fires at opposite corners increase protection radius.</p>
+            
+            <div class="section-divider"></div>
+            
+            <div class="quick-summary">
+                <h3>🧾 13) Quick Summary (for FunPay Listing)</h3>
+                <ol>
+                    <li>1️⃣ Gather many saplings (20–50).</li>
+                    <li>2️⃣ Plant 2–3 overlapping rings of trees.</li>
+                    <li>3️⃣ Leave one narrow entrance.</li>
+                    <li>4️⃣ Place 3–4 bear traps inside.</li>
+                    <li>5️⃣ Keep multiple campfires burning.</li>
+                    <li>6️⃣ Stock food, bandages, and fuel.</li>
+                    <li>7️⃣ Survive 99 nights — safely and efficiently.</li>
+                </ol>
+            </div>
+            
+            <button class="back-btn" onclick="hideContent('englishContent')">Back to Menu</button>
+        </div>
+        
+        <footer>
+            <p>Гайд по выживанию в 99 nights in the forest | ПРИВАТНЫЙ САЙТ, ДОСТУП ТОЛЬКО У ТЕХ КТО КУПИЛ ДОСТУП © 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('russianBtn').addEventListener('click', function() {
+            showContent('russianContent');
+        });
+        
+        document.getElementById('englishBtn').addEventListener('click', function() {
+            showContent('englishContent');
+        });
+        
+        function showContent(contentId) {
+            // Скрыть все содержимое
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Показать выбранное содержимое
+            document.getElementById(contentId).classList.add('active');
+            
+            // Прокрутить к содержимому
+            document.getElementById(contentId).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function hideContent(contentId) {
+            document.getElementById(contentId).classList.remove('active');
+            
+            // Прокрутить обратно к меню
+            document.querySelector('.menu').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
